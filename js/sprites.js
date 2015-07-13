@@ -154,8 +154,6 @@ Player.prototype.update = function(time) {
         this.position.x = (game.width-this.size.width);
     }
 
-    this.speed.x *= .95;
-
     game.score++;
 
 };
