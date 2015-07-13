@@ -19,7 +19,8 @@ var Sprite = function() {
     this.position = {
         x: 0,
         y: 0
-    }
+    };
+    this.collisionList = [];
 };
 
 Sprite.prototype = {
@@ -27,6 +28,14 @@ Sprite.prototype = {
     update: function(time) {
         if (this.visible == false) {
             return false;
+        }
+        if (this.collisionList.length > 0) {
+            for (var i = 0; i < GameObjects.length; i++) {
+                if (this.collisionList.indexOf(GameObjects[i].name) > -1 &&
+                    this.checkCollision(GameObjects[i])) {
+                    this.collide(GameObjects[i]);
+                }
+            }
         }
         return true;
     },
@@ -50,6 +59,20 @@ Sprite.prototype = {
         var indexOf = GameObjects.indexOf(this);
         GameObjects.splice(indexOf, 1);
 
+    },
+
+    collide: function (target) {
+
+    },
+
+    checkCollision: function(target) {
+        if (this.position.x < target.position.x + target.size.width &&
+            this.position.x + this.size.width > target.position.x &&
+            this.position.y < target.position.y + target.size.height &&
+            this.size.height + this.position.y > target.position.y) {
+            return true;
+        }
+        return false;
     }
 
 };
@@ -67,6 +90,7 @@ Obstacle = function () {
         width: 50,
         height: 50
     }
+
 };
 
 Obstacle.prototype = Object.create(Sprite.prototype);
@@ -84,5 +108,61 @@ Obstacle.prototype.update = function(time) {
         this.position.x = Math.random() * game.width;
         this.position.y = -(this.size.height);
     }
+
+};
+
+Player = function () {
+
+    Sprite.call(this);
+    this.name = 'player';
+    this.color = '#0000ff';
+    this.size = {
+        width: 50,
+        height: 50
+    };
+    this.speed = {
+        x: 0,
+        y: 0
+    };
+    this.position.x = game.width / 2;
+    this.position.y = game.height - 60;
+    this.collisionList = ['obstacle'];
+
+};
+
+Player.prototype = Object.create(Sprite.prototype);
+Player.prototype.constructor = Player;
+
+Player.prototype.update = function(time) {
+
+    if (!Sprite.prototype.update.call(this, time)) {
+        return false;
+    }
+
+    if (this.speed.x < -10) {
+        this.speed.x = -10;
+    }
+    else if (this.speed.x > 10) {
+        this.speed.x = 10;
+    }
+
+    this.position.x += this.speed.x;
+    if (this.position.x < 0) {
+        this.position.x = 0;
+    }
+    else if (this.position.x > (game.width-this.size.width)) {
+        this.position.x = (game.width-this.size.width);
+    }
+
+    this.speed.x *= .95;
+
+    game.score++;
+
+};
+
+Player.prototype.collide = function(target) {
+
+    Sprite.prototype.collide.call(this, target);
+    game.score = 0;
 
 };
