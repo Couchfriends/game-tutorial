@@ -1,4 +1,4 @@
-# game-tutorial
-Create a real-time multiplayer game in 30 minutes or less with HTML5
+# Built a real-time multiplayer game with HTML5 in less than 30 minutes
+Basic tutorial to built a real-time multiplayer game in HTML5 using the [Couchfriends Controller API](https://github.com/Couchfriends/Controller-API). This tutorial will help you building your first multiplayer game in four easy steps.
 
-See www.couchfriends.com for the tutorial. Each step is in a separate folder. 4 is the final version.
+See [http://www.couchfriends.com/posts/4-built-a-real-time-multiplayer-game-with-html5-in-less-than-30-minutes](http://www.couchfriends.com/posts/4-built-a-real-time-multiplayer-game-with-html5-in-less-than-30-minutes) for the tutorial. Each step is in a separate folder. 4 is the final version.
