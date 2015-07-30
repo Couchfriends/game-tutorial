@@ -44,9 +44,9 @@ function init() {
     var obstacle = new Obstacle();
     obstacle.add();
     requestAnimFrame(render);
-    COUCHFRIENDS.settings.apiKey = '1234';
+    COUCHFRIENDS.settings.apiKey = '';
     COUCHFRIENDS.settings.host = 'ws.couchfriends.com';
-    COUCHFRIENDS.settings.port = '1234';
+    COUCHFRIENDS.settings.port = '80';
     COUCHFRIENDS.connect();
 }
 
